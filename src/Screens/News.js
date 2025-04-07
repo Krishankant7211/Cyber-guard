@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ImageBackground } from 'react-native'
 import React from 'react'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Newsbg = require('../Assets/newsbg2.png');
 
@@ -15,8 +15,6 @@ const News = () => {
           <Text style={{ fontWeight : '700' , flex : 0.3 , paddingLeft : 20 ,  fontSize: 20, color: '#000' , marginTop : 40 }} > CYBER NEWS </Text>
           <Text style={{   fontWeight : 'bold' , flex : 0.7 , fontSize: 32, color: '#000' , padding : 10 }} > Recent Frauds </Text>
         </View>
-
-        
 
 
       </ImageBackground>
@@ -41,5 +39,6 @@ const styles = StyleSheet.create({
     flex :1 ,
     backfaceVisibility : '#fff',
     padding : 5,
+    
   }
 })

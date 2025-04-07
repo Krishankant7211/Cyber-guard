@@ -1,36 +1,59 @@
-import { Button, Image, StyleSheet, ImageBackground, Text, View } from 'react-native'
+import { Button, Image, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+
 const localImage = require("../Assets/Profileimg.jpg");
 
-const Setting = () => {
+const Setting = ({navigation}) => {
   return (
-    <SafeAreaView style = {styles.Safecontener} >
+  <SafeAreaView  style = {styles.Safecontener} >
     <View style={styles.container}>
 
     //This is for header View
       <View style={styles.Header}>
+        
         <Image
-          source={localImage} style={{ width: 160, height: 160, borderRadius: 80, elevation: 30, }} />
-        <View style={{ width: 160, height: 160, justifyContent: 'center' }}>
-          <Text style={styles.HeaderText}>Name</Text>
-          <Text style={styles.HeaderText}>Email</Text>
+          source={localImage} style={{ width: 140, height: 140, borderRadius: 70, elevation: 30,margin : 10 }} />
+        <View style={{ width: "100%", height: '20%', justifyContent: 'center', flex : 1 }}>
+          <Text style={styles.HeaderText}>Krishankant </Text>
+          <Text style={styles.HeaderText}>Krishanasharma7211@gmail.com</Text>
         </View>
       </View>
 
-    //This is for Bottom View
-      <View style={styles.Botton}>
-        <View style={styles.Box} />
-        <View style={styles.Box} />
-        <View style={styles.Box} />
+    //This is for buttons 
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }} >
+        //profile button
+      <TouchableOpacity style={styles.touchableopsbtn} onPress={() => { navigation.navigate('Profile') }} >
+        <Text style={{ color: '#fff' , fontSize : 20 }} >Manage Profile</Text>
+      </TouchableOpacity>
+
+      //Notification button
+      <TouchableOpacity style={styles.touchableopsbtn} >
+        <Text style={{ color: '#fff' , fontSize : 20 }} >Notifications</Text>
+      </TouchableOpacity>
+
+      //Help and support button
+      <TouchableOpacity style={styles.touchableopsbtn} >
+        <Text style={{ color: '#fff' , fontSize : 20 }} >Help & Support</Text>
+      </TouchableOpacity>
+
+      //share app button
+      <TouchableOpacity style={styles.touchableopsbtn} >
+        <Text style={{ color: '#fff' , fontSize : 20 }} >Share App</Text>
+      </TouchableOpacity>
+
+      //Logout button
+      <TouchableOpacity style={styles.touchableopsbtn} >
+        <Text style={{ color: '#fff' , fontSize : 20 }} onPress={() => { navigation.navigate('Login') }} >Logout</Text>
+      </TouchableOpacity>
+
+
+
       </View>
 
     </View>
-
     </SafeAreaView>
-
-
   )
 };
 
@@ -39,31 +62,28 @@ export default Setting
 const styles = StyleSheet.create({
   Safecontener : {
     flex :1 ,
-    backfaceVisibility : '#fff',
-    padding : 5,
+    paddingTop : 5,
+    backfaceVisibility : 'hidden'
   },
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: '#E4DEDE'
+    backgroundColor: 'white'
   },
   Header: {
-    flexDirection: 'row',
-    paddingHorizontal: 30,
-    paddingVertical: 80,
-    height: 290,
+    padding : 10,
+    justifyContent : 'center',
+    alignItems : 'center',
+    height:'40%' ,
     width: '100%',
-    backgroundColor: '#AB7983',
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    backgroundColor: '#3a36a1',
     elevation: 30
   },
   HeaderText: {
-    alignSelf: 'center',
-    fontSize: 25,
+    fontSize: 20,
     color: 'white',
-    fontWeight: '600',
-    justifyContent: 'space-evenly'
+    fontWeight: '400',
+    paddingLeft : 20
   },
   Botton: {
     flex: 1,
@@ -76,13 +96,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1F0F0',
     elevation: 30,
   },
-  Box: {
-    margin: 30,
+  touchableopsbtn: {
+    height: 50,
     width: '90%',
-    height: 120,
-    backgroundColor: '#AB7983',
-    alignSelf: 'center',
-    borderRadius: 40,
-    elevation: 30
+    marginTop: 10,
+    backgroundColor: '#3a36a1',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+
   },
 })
+

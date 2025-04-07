@@ -26,7 +26,7 @@ const Home = () => {
 
 
     // welcome text
-      <View style={{ flex: .2, justifyContent: 'center ', alignItems: 'center', padding: 5, margin: 10, borderRadius: 40 , backgroundColor: 'darkslateblue' , elevation : 30 }}  >
+      <View style={{ flex: .2, justifyContent: 'center ', alignItems: 'center', padding: 5, margin: 10, borderRadius: 40 , backgroundColor: '#3a36a1' , elevation : 30 }}  >
         <Text style={{ justifyContent: 'center', marginTop: 3, fontSize: 22, fontWeight: '700', color: 'white' }} > WELCOME </Text>
         <Text style={{ justifyContent: 'center', marginTop: 8, fontSize: 18, fontWeight: '600', color: 'white' }} > Stay cyber Healthy Stay Secure </Text>
       </View>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   Safecontener : {
     flex :1 ,
     backfaceVisibility : '#fff',
-    padding : 5,
+    paddingTop : "5%",
   },
   Header: {
     flexDirection: 'row',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'lavender',
     borderWidth: .2,
-    backgroundColor: 'darkslateblue',
+    backgroundColor: '#3a36a1',
     alignItems: 'center',
     justifyContent: 'center',
     elevation : 30 ,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   CenterText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#4b3983',
+    color: '#3a36a1',
     flex: .4,
     justifyContent: 'center',
     paddingTop: 10,
