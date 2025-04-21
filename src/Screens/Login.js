@@ -1,14 +1,25 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImageBackground } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImageBackground, Alert } from 'react-native'
+import React , {useState} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import auth from '@react-native-firebase/auth';
+
 
 const Loginbg = require('../Assets/register.png');
 
 const login = ({ navigation }) => {
 
+   const [Email, setEmail] = useState('');
+      const [Password, setPassword] = useState('');
+
 // function to login user to main dashboard
 const LoginUser = () => {
-
+  auth().signInWithEmailAndPassword(Email,Password).then(() => {
+    navigation.navigate('HomeBottomNav');
+      // Alert.alert("user logged in");
+    }
+  ).catch(Error => {
+    console.log(Error)
+  });
   
 }
 
@@ -24,9 +35,19 @@ const LoginUser = () => {
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }} >
           <Text style={styles.text} > Login  </Text>
-          <TextInput placeholder=' Email ' style={styles.textinput} />
-          <TextInput placeholder=' Password ' style={styles.textinput} />
-          <TouchableOpacity style={styles.touchableopsbtn} onPress={() => { navigation.navigate('HomeBottomNav') }} >
+          <TextInput placeholder=' Email ' 
+          value={Email}
+          onChangeText={txt => setEmail(txt)}
+          style={styles.textinput} />
+
+
+          <TextInput placeholder=' Password '
+           value={Password}
+           onChangeText={txt => setPassword(txt)}
+            style={styles.textinput} />
+
+
+          <TouchableOpacity style={styles.touchableopsbtn} onPress = {LoginUser} >
             <Text style={{ color: '#fff' , fontSize : 20 }} > Login </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchableopstext} onPress={() => { navigation.navigate('Register') }}  >

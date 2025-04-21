@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground ,  TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 
 const Loginbg = require('../Assets/register.png');
@@ -11,8 +13,116 @@ const register = ({ navigation }) => {
     const [Name , setName ] = useState('');
 
     // function to create user on firebase
-    
+    const createUser = () => {
+        auth()
+  .createUserWithEmailAndPassword(Email, Password)
+  .then(() => {
+    console.log('User account created & signed in!');
+    sendVerificationEmail();
+    addUserToFirestore();
+  })
+  .catch(error => {
+    if (error.code === 'auth/email-already-in-use') {
+      console.log('That email address is already in use!');
+    }
+
+    if (error.code === 'auth/invalid-email') {
+      console.log('That email address is invalid!');
+    }
+
+    console.error(error);
+  });
+    }
     // create user function end here 
+
+
+// function to send verification email
+const sendVerificationEmail = () => {
+    auth().currentUser.sendEmailVerification()
+    .then(() => {
+        console.log('Verification email sent!');
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+    // send verification email function end here
+
+    // function to send password reset email
+const sendPasswordResetEmail = () => {
+        auth().sendPasswordResetEmail(Email)
+        .then(() => {
+            console.log('Password reset email sent!');
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+    // send password reset email function end here
+
+    // function to add user to firestore
+const addUserToFirestore = () => {
+        const user = auth().currentUser;
+        const userData = {
+            uid: user.uid,
+            name: Name,
+            email: Email,
+            createdAt: new Date(),
+        };
+        firestore()
+            .collection('users')
+            .doc(user.uid)
+            .set(userData)
+            .then(() => {
+                console.log('User added to Firestore!');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+    // add user to firestore function end here
+
+    // function to get user data from firestore
+const getUserDataFromFirestore = () => {
+        const user = auth().currentUser;
+        firestore()
+            .collection('users')
+            .doc(user.uid)
+            .get()
+            .then(documentSnapshot => {
+                if (documentSnapshot.exists) {
+                    console.log('User data: ', documentSnapshot.data());
+                } else {
+                    console.log('No user data found!');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+    // get user data from firestore function end here
+
+    // function to update user data in firestore
+const updateUserDataInFirestore = () => {
+        const user = auth().currentUser;
+        const userData = {
+            name: Name,
+            email: Email,
+            updatedAt: new Date(),
+        };
+        firestore()
+            .collection('users')
+            .doc(user.uid)
+            .update(userData)
+            .then(() => {
+                console.log('User data updated in Firestore!');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+    // update user data in firestore function end here
+
 
     return (
         <SafeAreaView style = {styles.Safecontener}   >
@@ -43,7 +153,7 @@ const register = ({ navigation }) => {
 
 
             <TouchableOpacity style={styles.touchableopsbtn} onPress={() => { 
-                // createUser();
+                createUser();
                 navigation.navigate('Login') }}  >
                 <Text style={{ color: '#fff' , fontSize : 20 }} > Register </Text>
             </TouchableOpacity>

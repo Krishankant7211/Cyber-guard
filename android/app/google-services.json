@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "493050487438",
+    "project_id": "cyber-guard-c12b7",
+    "storage_bucket": "cyber-guard-c12b7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493050487438:android:7a5ee1aceab256bca35fdf",
+        "android_client_info": {
+          "package_name": "com.cyberman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493050487438-q1ucb90pj2mka7lll9glqsst8p04jfbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cyberman",
+            "certificate_hash": "9d3f9e535aa776094953859ad28626fea1c11bc2"
+          }
+        },
+        {
+          "client_id": "493050487438-r5chb2pv7taj1v75hpph0pg0vmn9l7o9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7XTuvz_N4j8a8EVJ8xHPHEDtQFxSH3Vs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493050487438-r5chb2pv7taj1v75hpph0pg0vmn9l7o9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
