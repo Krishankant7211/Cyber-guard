@@ -31,7 +31,7 @@ const register = ({ navigation }) => {
     }
 
     console.error(error);
-  });
+        });
     }
     // create user function end here 
 

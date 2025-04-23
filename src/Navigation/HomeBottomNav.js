@@ -3,8 +3,8 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../Screens/Home';
 import News from '../Screens/News';
-import Aichat from '../Screens/Aichat';
 import Setting from '../Screens/Setting';
+import Events from '../Screens/Events';
 
 
 const BottonTab = createBottomTabNavigator();
@@ -24,10 +24,10 @@ const HomeBottomNav = () => {
                 }} />
                 
             <BottonTab.Screen 
-            name='AI Chat' 
-            component={Aichat} 
+            name='Events' 
+            component={Events} 
             options={{ headerShown: false , 
-                title : 'AI Chat',
+                title : 'Events',
                     tabBarIcon : ({focused}) => (
                         <Image source={require ('../Assets/chat.png')} style = {{height : 36 , width : 36 , tintColor : focused ? '#1e98d5' : 'lightgrey'  }} />
                     )
