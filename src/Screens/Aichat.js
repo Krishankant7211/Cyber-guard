@@ -106,10 +106,14 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#98C9ED',
-    padding: 15,
+    padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    elevation: 20,
+    shadowColor: '#2F2F2F',
   },
   headerText: {
     marginTop: 25,
@@ -140,10 +144,18 @@ const styles = StyleSheet.create({
   userMessage: {
     backgroundColor: '#2f2f2f',
     alignSelf: 'flex-end',
+    elevation : 10,
+    shadowColor: 'blue',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 10,
   },
   aiMessage: {
-    backgroundColor: 'darkslateblue',
+    backgroundColor: '#98C9ED',
     alignSelf: 'flex-start',
+    elevation : 25,
+    shadowColor: 'blue',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 10,
   },
   messageText: {
     color: '#FFF',
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderTopWidth: 1,
     borderColor: '#DDD',
-    paddingBottom: 40,
+    paddingBottom: 10,
   },
   input: {
     flex: 1,

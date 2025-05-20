@@ -1,4 +1,4 @@
-import { Button, Image, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native';
+import { Button, Image, StyleSheet, ImageBackground, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
@@ -44,58 +44,79 @@ const Setting = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.Safecontener}>
-      <View style={styles.container}>
-        {/* Header View with Profile Info */}
-        <View style={styles.Header}>
-          <Image
-            source={localImage}
-            style={{ width: 140, height: 140, borderRadius: 70, elevation: 30, margin: 10 }}
-          />
-          <View style={{ width: '100%', height: '20%', justifyContent: 'center', flex: 1 }}>
-            <Text style={styles.HeaderText}>{userData.name}</Text>
-            <Text style={styles.HeaderText}>{userData.email}</Text>
-          </View>
+    <SafeAreaView style={styles.containerback}>
+            // Header View with Profile Info
+
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Settings</Text>
+      </View>
+
+
+      <View style={styles.middleView}>
+        <Image
+          source={localImage}
+          style={{ width: 140, height: 140, shadowOpacity:6, shadowColor: '#308CD7' ,borderRadius: 70, elevation: 30 }}
+        />
+
+        <View style={{ width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{
+            color: '#2F2F2F',
+            fontSize: 20,
+            fontWeight: 'semibold',
+            fontFamily: 'inter',
+          }}>{userData.name}</Text>
+          <Text style={{
+            color: '#2F2F2F',
+            fontSize: 20,
+            fontWeight: 'semibold',
+            fontFamily: 'inter',
+          }} >{userData.email}</Text>
         </View>
+
+          <View style={{ width: '100%', height : "65%" ,justifyContent :"center",  alignItems: 'center', backgroundColor: "#D7F0FC" , borderTopLeftRadius: 30 , borderTopRightRadius: 30 , borderWidth: 6 , borderColor : "#fff" , elevation : 20 , shadowColor: '#000' }}>
 
         {/* Buttons View */}
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          {/* Profile button */}
-          <TouchableOpacity
-            style={styles.touchableopsbtn}
-            onPress={() => {
-              navigation.navigate('Profile'); // Assuming a Profile screen exists
-            }}
-          >
-            <Text style={{ color: '#fff', fontSize: 20 }}>Manage Profile</Text>
-          </TouchableOpacity>
 
-          {/* Notification button */}
-          <TouchableOpacity style={styles.touchableopsbtn}>
-            <Text style={{ color: '#fff', fontSize: 20 }}>Notifications</Text>
-          </TouchableOpacity>
+        {/* Profile button */}
+        <TouchableOpacity
+          style={styles.pressablesbtn}
+          onPress={() => {
+            navigation.navigate('Profile'); // Assuming a Profile screen exists
+          }}
+        >
+          <Text style={styles.btnText}>Manage Profile</Text>
+        </TouchableOpacity>
 
-          {/* Help and Support button */}
-          <TouchableOpacity style={styles.touchableopsbtn}>
-            <Text style={{ color: '#fff', fontSize: 20 }}>Help & Support</Text>
-          </TouchableOpacity>
+        {/* Notification button */}
+        <TouchableOpacity style={styles.pressablesbtn}>
+          <Text style={styles.btnText}>Notifications</Text>
+        </TouchableOpacity>
 
-          {/* Share App button */}
-          <TouchableOpacity style={styles.touchableopsbtn}>
-            <Text style={{ color: '#fff', fontSize: 20 }}>Share App</Text>
-          </TouchableOpacity>
+        {/* Help and Support button */}
+        <TouchableOpacity style={styles.pressablesbtn}>
+          <Text style={styles.btnText}>Help & Support</Text>
+        </TouchableOpacity>
 
-          {/* Logout button */}
-          <TouchableOpacity
-            style={styles.touchableopsbtn}
-            onPress={() => {
-              auth().signOut().then(() => navigation.navigate('Login'));
-            }}
-          >
-            <Text style={{ color: '#fff', fontSize: 20 }}>Logout</Text>
-          </TouchableOpacity>
+        {/* Share App button */}
+        <TouchableOpacity style={styles.pressablesbtn}>
+          <Text style={styles.btnText}>Share App</Text>
+        </TouchableOpacity>
+
+        {/* Logout button */}
+        <TouchableOpacity
+          style={styles.pressablesbtn}
+          onPress={() => {
+            auth().signOut().then(() => navigation.navigate('Login'));
+          }}
+        >
+          <Text style={styles.btnText}>Logout</Text>
+        </TouchableOpacity>
+
         </View>
+
       </View>
+
+
     </SafeAreaView>
   );
 };
@@ -103,49 +124,63 @@ const Setting = ({ navigation }) => {
 export default Setting;
 
 const styles = StyleSheet.create({
-  Safecontener: {
+
+  containerback: {
     flex: 1,
-    paddingTop: 5,
-    backfaceVisibility: 'hidden',
+    backgroundColor: '#d7f0fc',
   },
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'white',
-  },
-  Header: {
-    padding: 10,
-    justifyContent: 'center',
+  header: {
+    flex: 0.065,
+    backgroundColor: '#d7f0fc',
+    paddingStart: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: '40%',
-    width: '100%',
-    backgroundColor: '#3a36a1',
-    elevation: 30,
   },
-  HeaderText: {
+  btnText: {
+    color: '#308CD7',
     fontSize: 20,
-    color: 'white',
-    fontWeight: '400',
+    fontWeight: "600",
+    fontFamily: 'calibri',
+    padding: 5
+  },
+
+  headerText: {
+    color: '#2F2F2F',
+    fontSize: 36,
+    fontWeight: 'semibold',
+    fontFamily: 'inter',
+  },
+  middleView: {
+    flex: 0.94,
+    marginTop: 20,
+    justifyContent: "flex-start",
+    alignItems: 'center',
+  },
+  pressablesbtn: {
+    fontSize: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    marginTop: 15,
+    width: '90%',
+    height: 50,
     paddingLeft: 20,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    elevation : 7 ,
+    shadowOpacity:6, 
+    shadowColor: '#308CD7'
+
   },
-  Botton: {
-    flex: 1,
-    borderTopLeftRadius: 40,
-    marginTop: 50,
-    borderTopRightRadius: 40,
-    width: '100%',
-    justifyContent: 'space-evenly',
-    alignSelf: 'center',
-    backgroundColor: '#F1F0F0',
-    elevation: 30,
-  },
-  touchableopsbtn: {
+  pressablesavebtn: {
     height: 50,
     width: '90%',
-    marginTop: 10,
-    backgroundColor: '#3a36a1',
+    marginTop: 30,
+    backgroundColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
+
   },
+
 });

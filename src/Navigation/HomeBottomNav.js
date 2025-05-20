@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View , Image, Settings } from 'react-native'
+import { StyleSheet, Text, View, Image, Settings } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../Screens/Home';
@@ -17,39 +17,41 @@ const HomeBottomNav = () => {
                 component={Home}
                 options={{
                     headerShown: false,
-                    title : 'Home',
-                    tabBarIcon : ({focused}) => (
-                        <Image source={require ('../Assets/home.png')} style = {{height : 36 , width : 36 , tintColor : focused ? '#1e98d5' : 'lightgrey'  }} />
+                    title: 'Home',
+                    tabBarIcon: ({ focused }) => (
+                        <Image source={require('../Assets/home.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
                     )
                 }} />
-                
-            <BottonTab.Screen 
-            name='Events' 
-            component={Events} 
-            options={{ headerShown: false , 
-                title : 'Events',
-                    tabBarIcon : ({focused}) => (
-                        <Image source={require ('../Assets/chat.png')} style = {{height : 36 , width : 36 , tintColor : focused ? '#1e98d5' : 'lightgrey'  }} />
-                    )
-            }} />
+
+
             <BottonTab.Screen
                 name='News'
                 component={News}
                 options={{
                     headerShown: false,
-                    title : 'News',
-                    tabBarIcon : ({focused}) => (
-                        <Image source={require ('../Assets/news.png')} style = {{height : 36 , width : 36 , tintColor : focused ? '#1e98d5' : 'lightgrey'  }} />
+                    title: 'News',
+                    tabBarIcon: ({ focused }) => (
+                        <Image source={require('../Assets/news.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
                     )
-                }} /> 
-             <BottonTab.Screen
+                }} />
+            <BottonTab.Screen
+                name='Events'
+                component={Events}
+                options={{
+                    headerShown: false,
+                    title: 'Events',
+                    tabBarIcon: ({ focused }) => (
+                        <Image source={require('../Assets/chat.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
+                    )
+                }} />
+            <BottonTab.Screen
                 name='Settings'
                 component={Setting}
                 options={{
                     headerShown: false,
-                    title : 'Settings',
-                    tabBarIcon : ({focused}) => (
-                        <Image source={require ('../Assets/settings.png')} style = {{height : 36 , width : 36 , tintColor : focused ? '#1e98d5' : 'lightgrey'  }} />
+                    title: 'Settings',
+                    tabBarIcon: ({ focused }) => (
+                        <Image source={require('../Assets/settings.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
                     )
                 }} />
         </BottonTab.Navigator>

@@ -6,6 +6,7 @@ import HomeBottomNav from './HomeBottomNav';
 import Login from '../Screens/Login';
 import Register from '../Screens/Register';
 import Profile from '../Screens/Profile';
+import App from '../../App';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,7 +18,7 @@ const Stacknavigation = () => {
             <Stack.Screen name='Login' component={Login} options={{headerShown : false}} />
             <Stack.Screen name='Register' component={Register} options={{headerShown : false}} />
             <Stack.Screen name='HomeBottomNav' component={HomeBottomNav} options={{headerShown : false}} />
-            <Stack.Screen name='Profile' component={Profile} options={{headerShown : false}} />
+            <Stack.Screen name='App' component={App} options={{headerShown : false}} />
       </Stack.Navigator>
     </NavigationContainer>
   )

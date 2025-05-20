@@ -1,52 +1,112 @@
-import { StyleSheet, Text, View,TextInput, Image, Pressable } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native'
+import React ,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const localImage = require("../Assets/Profileimg.jpg");
 
-const Profile = ({navigation}) => {
+
+const Profile = ({ navigation }) => {
+
+  const [Email, setEmail] = useState('');
+      const [Password, setPassword] = useState('');
+      const [Name , setName ] = useState('');
+      const [loading , setLoading] = useState('');
+
+
+  const updateUserDataInFirestore = () => {
+    setLoading(true);
+        const user = auth().currentUser;
+        const userData = {
+            name: Name,
+            email: Email,
+            password : Password,
+            updatedAt: new Date(),
+        };
+        firestore()
+            .collection('users')
+            .doc(user.uid)
+            .update(userData)
+            .then(() => {
+                console.log('User data updated in Firestore!');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+            setLoading(false);
+    }
+    // update user data in firestore function end here
+
+
+
+
+
   return (
-    <SafeAreaView style = {styles.safeview} >
-    <View style={styles.container}>
+    <SafeAreaView style={styles.containerback}>
+        // Header View with Profile Info
 
-      // This is for profile photo 
-      <Pressable   style = {{justifyContent : 'center' , alignItems : 'center' ,  }}>
-        <Image source={localImage} style = {{height :160 , width :160 ,borderRadius : 80 ,marginBlockStart : 80 }} />
-      </Pressable>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Manage Profile</Text>
+      </View>
 
-      // This is for name , email and save Button
-      <View style = {{alignItems :'center'}} >
-        // for editing the name 
-      <TextInput placeholder='Edit Name ' style={styles.textinput} />
-// for editing the emmail
-      <TextInput placeholder='Edit Email ' style={styles.textinput} />
 
-// for saving the changes 
-      <Pressable style = {styles.pressablesavebtn} onPress={() => { navigation.navigate('HomeBottomNav') }} >
-      <Text  style={{ color: '#fff' , fontSize : 20 }} >Save</Text>
-      </Pressable>
+      <View style={styles.middleView}>
+        <Image
+          source={localImage}
+          style={{ width: 140, height: 140, borderRadius: 70, elevation: 30 }}
+        />
+
+        <Text style={{
+          paddingTop: 20,
+          color: '#2F2F2F',
+          fontSize: 20,
+          fontWeight: 'semibold',
+          fontFamily: 'inter',
+        }}>Edit your profile</Text>
+        <TextInput placeholder='Edit Name' value={Name} onChangeText={txt=> setName(txt)} style={styles.textinput} />
+        <TextInput placeholder='Edit Email'value= {Email} onChangeText={txt=> setEmail(txt)}  style={styles.textinput} />
+        <TextInput placeholder='Update Password'value={Password} onChangeText={txt=> setPassword(txt)}  style={styles.textinput} />
+
+        <TouchableOpacity style={styles.pressablesavebtn}>
+          <Text style={{ color: 'white', fontSize: 20 }} onPress={()=>{updateUserDataInFirestore()}}   >Save</Text>
+        </TouchableOpacity>
+
 
       </View>
 
-    </View>
-
     </SafeAreaView>
+
   )
 };
 
 export default Profile
 
 const styles = StyleSheet.create({
-  safeview : {
-    flex : 1 ,
-    paddingTop : "8%" ,
-    backgroundColor : 'white'
-  }  ,
-  container: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: '#6749CA'
+
+  containerback: {
+    flex: 1,
+    backgroundColor: '#98C9ED',
+  },
+  header: {
+    flex: 0.06,
+    backgroundColor: '#98C9ED',
+    paddingStart: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerText: {
+    color: '#2F2F2F',
+    fontSize: 36,
+    fontWeight: 'semibold',
+    fontFamily: 'inter',
+  },
+  middleView: {
+    flex: 0.94,
+    marginTop: 20,
+    justifyContent: "flex-start",
+    alignItems: 'center',
   },
   textinput: {
     fontSize: 20,
@@ -58,9 +118,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     backgroundColor: 'white',
     borderColor: 'white',
-    
+
   },
-  pressablesavebtn : {
+  pressablesavebtn: {
     height: 50,
     width: '90%',
     marginTop: 30,
@@ -70,6 +130,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
 
   },
-  
+
 })
 

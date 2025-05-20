@@ -67,6 +67,7 @@ const addUserToFirestore = () => {
             uid: user.uid,
             name: Name,
             email: Email,
+            is_user : true,
             createdAt: new Date(),
         };
         firestore()
@@ -122,6 +123,7 @@ const updateUserDataInFirestore = () => {
             });
     }
     // update user data in firestore function end here
+    
 
 
     return (
