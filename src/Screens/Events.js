@@ -4,7 +4,7 @@ import React from 'react'
 const Events = () => {
   return (
     <View>
-      <Text>Events</Text>
+      <Text>kanishka</Text>
     </View>
   )
 }
