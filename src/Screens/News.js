@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Card from '../Components/Card';
-import {MagnifyingGlassIcon} from 'react-native-heroicons/solid';
+import { MagnifyingGlassIcon } from 'react-native-heroicons/solid';
 
+const newslogo = require('../Assets/logo.png');
 
 const News = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -26,12 +27,13 @@ const News = ({ navigation }) => {
         shadowColor: '#0198E3',
         shadowOpacity: 0.6,
         elevation: 5,
-        backgroundColor: '#40ACFF',
+        backgroundColor: 'white',
+       
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#233FCC',
       headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 28,
+        fontSize: 30,
       },
     });
   }, [navigation]);
@@ -46,7 +48,7 @@ const News = ({ navigation }) => {
       if (result.status === 'ok' && result.articles) {
         setData(result.articles);
         if (result.articles.length === 0) {
-          setError('No new articles found for this category'); // Handle empty response
+          setError('No new articles found for this category');
         }
       } else {
         setError('Failed to fetch news articles');
@@ -56,16 +58,15 @@ const News = ({ navigation }) => {
       setError('An error occurred while fetching news');
     } finally {
       setLoading(false);
-      // Add slight delay to ensure refresh animation is visible
       setTimeout(() => {
         setRefreshing(false);
-      }, 500); // 500ms delay for better UX
+      }, 500);
     }
   };
 
   const onRefresh = () => {
     setRefreshing(true);
-    setData([]); // Clear existing data for a "fresh" reload
+    setData([]);
     getData(categories[select].query);
   };
 
@@ -76,7 +77,7 @@ const News = ({ navigation }) => {
 
   useEffect(() => {
     if (select !== null) {
-      setData([]); // Clear data when changing categories
+      setData([]);
       getData(categories[select].query);
     }
   }, [select]);
@@ -194,11 +195,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoryContainer: {
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#40ACFF',
+    backgroundColor: 'white',
   },
   categoryList: {
     paddingVertical: 4,
@@ -214,7 +213,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#40ACFF',
   },
   selectedCategory: {
-    backgroundColor: 'black',
+    backgroundColor: '#233FCC',
+    borderColor:'red',
+    borderWidth:1
   },
   unselectedCategory: {
     backgroundColor: '#E5E7EB',

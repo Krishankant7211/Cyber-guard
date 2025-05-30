@@ -76,20 +76,21 @@ const Events = ({ navigation }) => {
         shadowColor: '#018AD8',
         shadowOpacity: 0.8,
         shadowRadius: 6,
-        borderRadius: 15,
-        backgroundColor: '#40ACFF',
+        bodercolor:'white',
+        boderwidth:2,
+        backgroundColor: 'white',
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#233FCC',
       headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 28,
+        fontSize: 30,
       },
       headerRight: () => (
         <TouchableOpacity
           style={{ marginRight: 16 }}
           onPress={() => setCalendarModalVisible(true)}
         >
-           <Fontisto name="date" size={28} color="#fff" />
+           <Fontisto name="date" size={30} color="#233FCC" />
         </TouchableOpacity>
       ),
     });
@@ -240,6 +241,8 @@ const styles = StyleSheet.create({
     shadowColor: '#018AD8',
     shadowOpacity: 0.8,
     shadowRadius: 6,
+     borderColor:'#CECECE',
+        borderWidth:2,
   },
   eventImage: {
     width: '100%',

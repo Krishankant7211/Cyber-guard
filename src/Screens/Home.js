@@ -3,20 +3,18 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const bg = require('../Assets/homebg.png');
-const Ban1 = require('../Assets/banner.png');
-const Ban2 = require('../Assets/bann.jpg');
+const homebg = require('../Assets/background1.png');
+const homelogo = require('../Assets/finallogo.png');
+const Ban2 = require('../Assets/homebanner.png');
 const Bottomview = require('../Assets/extrabg.png');
 
 const Home = () => {
   return (
     <SafeAreaView style = {styles.Safecontener} >
-    <ImageBackground source={Bottomview} resizeMode='cover' style={{ flex: 1 }}>
+    <ImageBackground source={homebg} resizeMode='cover' style={{ flex: 1 }}>
     // This is for header view
-      <View style={styles.Header} >
-        <Text style={styles.HeaderText} >
-          Cyber Guard
-        </Text>
+      <View style>
+        <Image source={homelogo} style={styles.Header} />
       </View>
 
     // This is for banners
@@ -26,9 +24,9 @@ const Home = () => {
 
 
     // welcome text
-      <View style={{ flex: .2, justifyContent: 'center ', alignItems: 'center', padding: 5, margin: 10, borderRadius: 40 , backgroundColor: '#3a36a1' , elevation : 30 }}  >
-        <Text style={{ justifyContent: 'center', marginTop: 3, fontSize: 22, fontWeight: '700', color: 'white' }} > WELCOME </Text>
-        <Text style={{ justifyContent: 'center', marginTop: 8, fontSize: 18, fontWeight: '600', color: 'white' }} > Stay cyber Healthy Stay Secure </Text>
+      <View style={{ flex: .2, justifyContent: 'center ', alignItems: 'center', padding: 5, margin: 20, borderRadius: 12 , backgroundColor: 'white' , elevation : 10 }}  >
+        <Text style={{ justifyContent: 'center', marginTop: 3, fontSize: 22, fontWeight: '700', color: '#233FCC' }} > WELCOME </Text>
+        <Text style={{ justifyContent: 'center', marginTop: 8, fontSize: 18, fontWeight: '600', color: 'black' }} > Think Before You Click </Text>
       </View>
 
 
@@ -41,39 +39,22 @@ const Home = () => {
 
 
       // Bottom design 
-      <View style={{ flex: 1, borderTopLeftRadius: 25, marginTop : 10  ,  borderTopRightRadius: 25, height: "50%", alignItems: 'center', width: '90%', alignSelf: 'center', backgroundColor: '#eef4fb' , elevation : 20 }} >
+      <View style={{ flex: 1, marginTop : 10  ,  height: "50%", alignItems: 'center', width: '100%', alignSelf: 'center', }} >
       // Main Text
 
-        <Text style={styles.CenterText}  > Trendings   </Text>
+        <Text style={styles.CenterText}  > Tip of the Day </Text>
 
       // Box sections
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }} >
 
       // First view
           <View style={styles.Newsbg} >
-            <Text style={styles.NewsText} > Windows Zero-Day Exploit: Russian Hackers Lead the Charge on Vulnerability Attacks . </Text>
+            <Text style={styles.NewsText} > AI Chatbot </Text>
           </View>
 
       // second view
           <View style={styles.Newsbg} >
-            <Text style={styles.NewsText} > AI-Powered Cyber Attacks Surge, with China-Linked Threats on the Rise </Text>
-          </View>
-
-        </View>
-
-
-      // second box sections
-        // Box sections 
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }} >
-
-      // First view
-          <View style={styles.Newsbg} >
-            <Text style={styles.NewsText} > SparrowDoor Backdoor Linked to Chinese Cyber Espionage Operations </Text>
-          </View>
-
-      // second view
-          <View style={styles.Newsbg} >
-            <Text style={styles.NewsText} >U.S. Government Issues New Guidelines on Protecting Critical Infrastructure from Cyber Threats </Text>
+            <Text style={styles.NewsText} > Games </Text>
           </View>
 
         </View>
@@ -93,42 +74,33 @@ const styles = StyleSheet.create({
     flex :1 ,
     backfaceVisibility : '#fff',
     paddingTop : "5%",
+    backgroundColor:'white',
   },
   Header: {
-    flexDirection: 'row',
-    paddingTop: 28,
+    paddingTop: 25,
     paddingLeft: 15,
-    height: 70,
+    height: 90,
     width: '100%',
-    borderColor: 'lavender',
-    borderWidth: .2,
+    //alignSelf: 'center',
+    alignItems:'center',
+    justifyContent:'center',
     backgroundColor: '#3a36a1',
-    alignItems: 'center',
-    justifyContent: 'center',
     elevation : 30 ,
   },
-  HeaderText: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: '600',
-    flex: 1,
-    justifyContent: 'center',
-
-  },
   Banner: {
-    width: '90%',
+    width: '95%',
     height: 180,
-    margin: 20,
+    margin: 10,
     alignSelf: 'center',
     borderRadius: 10,
     shadowRadius: 20,
-    shadowColor: 'darkblue',
-    elevation : 30
+    shadowColor: 'black',
+    elevation : 10
   },
   CenterText: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#3a36a1',
+    color: 'red',
     flex: .4,
     justifyContent: 'center',
     paddingTop: 10,

@@ -57,12 +57,12 @@ const Setting = ({ navigation }) => {
             style={{marginBottom: 2,width: 140,height: 140,shadowOpacity: 0.6,shadowColor: '#308CD7',borderRadius: 70,elevation: 30,}}
           />
           <Text
-            style={{color: '#2F2F2F',fontSize: 35,fontWeight: 'semibold',fontFamily: 'Roboto condensed',}}
+            style={{color: '#050171',fontSize: 35,fontWeight: 'semibold',fontFamily: 'Roboto condensed',}}
           >
             {userData.name}
           </Text>
           <Text
-            style={{color: '#2F2F2F',fontSize: 16,fontWeight: '600',fontFamily: 'Roboto condensed',
+            style={{color: '#050171',fontSize: 16,fontWeight: '600',fontFamily: 'Roboto condensed',
             }}
           >
             {userData.email}
@@ -76,28 +76,28 @@ const Setting = ({ navigation }) => {
             style={styles.pressablesbtn}
             onPress={() => navigation.navigate('Profile')}
           >
-            <AntDesign name="user" size={28} color="black" style={styles.icon} />
+            <AntDesign name="user" size={28} color="#050171" style={styles.icon} />
             <Text style={styles.btnText}>Manage Profile</Text>
             <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
           </TouchableOpacity>
 
           {/* Notification Button */}
           <TouchableOpacity style={styles.pressablesbtn}>
-            <AntDesign name="setting" size={28} color="black" style={styles.icon} />
+            <AntDesign name="setting" size={28} color="#050171" style={styles.icon} />
             <Text style={styles.btnText}>Notifications</Text>
             <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
           </TouchableOpacity>
 
           {/* Help and Support Button */}
           <TouchableOpacity style={styles.pressablesbtn}>
-            <AntDesign name="questioncircleo" size={28} color="black" style={styles.icon} />
+            <AntDesign name="questioncircleo" size={28} color="#050171" style={styles.icon} />
             <Text style={styles.btnText}>Help & Support</Text>
             <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
           </TouchableOpacity>
 
           {/* Share App Button */}
           <TouchableOpacity style={styles.pressablesbtn}>
-            <AntDesign name="sharealt" size={28} color="black" style={styles.icon} />
+            <AntDesign name="sharealt" size={28} color="#050171" style={styles.icon} />
             <Text style={styles.btnText}>Share App</Text>
             <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
           </TouchableOpacity>
@@ -109,7 +109,7 @@ const Setting = ({ navigation }) => {
               auth().signOut().then(() => navigation.navigate('Login'));
             }}
           >
-            <AntDesign name="poweroff" size={28} color="black" style={styles.icon} />
+            <AntDesign name="poweroff" size={28} color="#050171" style={styles.icon} />
             <Text style={styles.btnText}>Logout</Text>
             <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
           </TouchableOpacity>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     fontFamily: 'inter',
   },*/
   btnText: {
-    color: 'black',
+    color: '#003CA4',
     fontSize: 20,
     fontWeight: '600',
     fontFamily: 'calibri',

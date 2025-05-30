@@ -19,7 +19,7 @@ const HomeBottomNav = () => {
                     headerShown: false,
                     title: 'Home',
                     tabBarIcon: ({ focused }) => (
-                        <Image source={require('../Assets/home.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
+                        <Image source={require('../Assets/home.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
                     )
                 }} />
 
@@ -30,7 +30,7 @@ const HomeBottomNav = () => {
                 options={{
                     title: 'News',
                     tabBarIcon: ({ focused }) => (
-                        <Image source={require('../Assets/news.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
+                        <Image source={require('../Assets/news.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
                     )
                 }} />
             <BottonTab.Screen
@@ -39,7 +39,7 @@ const HomeBottomNav = () => {
                 options={{
                     title: 'Events',
                     tabBarIcon: ({ focused }) => (
-                        <Image source={require('../Assets/chat.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
+                        <Image source={require('../Assets/chat.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
                     )
                 }} />
             <BottonTab.Screen
@@ -49,7 +49,7 @@ const HomeBottomNav = () => {
                     headerShown: false,
                     title: 'Settings',
                     tabBarIcon: ({ focused }) => (
-                        <Image source={require('../Assets/settings.png')} style={{ height: 36, width: 36, tintColor: focused ? '#1e98d5' : 'lightgrey' }} />
+                        <Image source={require('../Assets/settings.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
                     )
                 }} />
         </BottonTab.Navigator>
