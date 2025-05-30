@@ -3,7 +3,6 @@ import React , {useState} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 
-
 const Loginbg = require('../Assets/background1.png');
 
 const login = ({ navigation }) => {
@@ -39,22 +38,22 @@ const LoginUser = () => {
 
           <Text style={styles.text2} >Shielding Access With Every Login </Text>
 
-          <TextInput placeholder=' Email ' 
+          <TextInput placeholder=' Enter Email ID' 
           value={Email}
           onChangeText={txt => setEmail(txt)}
           style={styles.textinput} />
 
-          <TextInput placeholder=' Password '
+          <TextInput placeholder=' EnterPassword '
            value={Password}
            onChangeText={txt => setPassword(txt)}
             style={styles.textinput} />
 
 
           <TouchableOpacity style={styles.touchableopsbtn} onPress = {LoginUser} >
-            <Text style={{ color: '#fff' , fontSize : 20 }} >Sign In</Text>
+            <Text style={{ color: '#fff' , fontSize : 20,fontFamily: "Roboto Condensed" }} >Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchableopstext} onPress={() => { navigation.navigate('Register') }}  >
-            <Text style={{ color: 'darkslateblue',color:'#050171', fontSize:16}} > Create New Account? Register Here  </Text>
+            <Text style={{ color: 'darkslateblue',color:'#050171', fontSize:16,fontFamily: "Roboto Condensed"}} > Create New Account? Register Here  </Text>
           </TouchableOpacity>
         </View>
 
@@ -72,14 +71,13 @@ const styles = StyleSheet.create({
   Safecontener : {
     flex :1 ,
     backfaceVisibility : '#fff',
-    backgroundColor:'white'
+    backgroundColor:'white',
   },
   text: {
     fontSize: 48,
     fontWeight: '700',
-    //fontWeight:700,
     color: 'black',
-    fontFamily: 'Roboto'
+    fontFamily: 'Roboto Condensed'
   },
   text2: {
     fontSize: 18,
@@ -88,10 +86,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     marginBottom: 50,
-    fontFamily: "Montserrat Regular"
+    fontFamily: "Roboto Condensed"
   },
   textinput: {
-    fontFamily: "Montserrat Regular",
+    fontFamily: "Roboto Condensed",
     fontSize: 20,
     borderRadius:2,
     borderWidth: 1,

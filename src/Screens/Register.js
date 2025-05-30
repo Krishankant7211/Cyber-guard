@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-
 const Loginbg = require('../Assets/background1.png');
 
 const register = ({ navigation }) => {
@@ -135,7 +134,7 @@ const updateUserDataInFirestore = () => {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }} >
             <Text style={styles.text} > Register  </Text>
 
-            <Text style={styles.text2} >Shielding Access With Every Login </Text>
+            <Text style={styles.text2} >Join The Cyber Shield Today</Text>
 
             <TextInput placeholder=' Name '
                 value={Name}
@@ -143,14 +142,19 @@ const updateUserDataInFirestore = () => {
                 style={styles.textinput}
             />
             
-            <TextInput placeholder=' Email '
+            <TextInput placeholder=' Enter Email ID '
                 value={Email}
                 onChangeText={txt => setEmail(txt)}
                 style={styles.textinput}
             />
 
+            <TextInput placeholder=' Enter Mobile Number '
+                value={Password}
+                onChangeText={txt => setPassword(txt)}
+                style={styles.textinput}
+            />
 
-            <TextInput placeholder=' Password '
+            <TextInput placeholder=' Enter Password '
                 value={Password}
                 onChangeText={txt => setPassword(txt)}
                 style={styles.textinput}
@@ -160,13 +164,13 @@ const updateUserDataInFirestore = () => {
             <TouchableOpacity style={styles.touchableopsbtn} onPress={() => { 
                 createUser();
                 navigation.navigate('Login') }}  >
-                <Text style={{ color: '#fff' , fontSize : 20 }} > Register </Text>
+                <Text style={{ color: '#fff' , fontSize : 20, }} > Sign Up </Text>
             </TouchableOpacity>
 
             
             <TouchableOpacity style={styles.touchableopstext} onPress={() => { 
                 navigation.navigate('Login') }}  >
-                <Text style={{ color: 'darkslateblue',fontSize:16}} > Already have an account? Login  </Text>
+                <Text style={{ color: 'darkslateblue',fontSize:16,fontFamily: "Roboto Condensed"}} > Already have an account? Login  </Text>
             </TouchableOpacity>
         </View>
 
@@ -191,19 +195,19 @@ const styles = StyleSheet.create({
         fontSize: 48,
         fontWeight: '700',
         color: 'black',
-        fontFamily: 'Roboto',
+        fontFamily: "Roboto Condensed",
     },
     text2: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight:400,
         color: '#050171',
         textAlign: 'center',
         marginTop: 5,
         marginBottom: 50,
-        fontFamily: "Montserrat Regular"
+        fontFamily: "Roboto Condensed"
     },
     textinput: {
-        fontFamily: "Montserrat Regular",
+        fontFamily: "Roboto Condensed",
         fontSize: 20,
         borderRadius:2,
         borderWidth: 1,

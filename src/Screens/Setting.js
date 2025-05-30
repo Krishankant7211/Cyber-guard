@@ -1,10 +1,13 @@
-import { Button, Image, StyleSheet, ImageBackground, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Image, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const localImage = require("../Assets/Profileimg.jpg");
+const Settingbg = require('../Assets/background1.png');
+const forwardImage = require('../Assets/fastforward.png');
 
 const Setting = ({ navigation }) => {
   // State to hold user data
@@ -45,78 +48,73 @@ const Setting = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.containerback}>
-            // Header View with Profile Info
-
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Settings</Text>
-      </View>
-
-
-      <View style={styles.middleView}>
-        <Image
-          source={localImage}
-          style={{ width: 140, height: 140, shadowOpacity:6, shadowColor: '#308CD7' ,borderRadius: 70, elevation: 30 }}
-        />
-
-        <View style={{ width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{
-            color: '#2F2F2F',
-            fontSize: 20,
-            fontWeight: 'semibold',
-            fontFamily: 'inter',
-          }}>{userData.name}</Text>
-          <Text style={{
-            color: '#2F2F2F',
-            fontSize: 20,
-            fontWeight: 'semibold',
-            fontFamily: 'inter',
-          }} >{userData.email}</Text>
+      {/* Background Image */}
+      <ImageBackground source={Settingbg} resizeMode='cover' style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {/* Profile Info View */}
+        <View style={styles.middleView}>
+          <Image
+            source={localImage}
+            style={{marginBottom: 2,width: 140,height: 140,shadowOpacity: 0.6,shadowColor: '#308CD7',borderRadius: 70,elevation: 30,}}
+          />
+          <Text
+            style={{color: '#2F2F2F',fontSize: 35,fontWeight: 'semibold',fontFamily: 'Roboto condensed',}}
+          >
+            {userData.name}
+          </Text>
+          <Text
+            style={{color: '#2F2F2F',fontSize: 16,fontWeight: '600',fontFamily: 'Roboto condensed',
+            }}
+          >
+            {userData.email}
+          </Text>
         </View>
 
-          <View style={{ width: '100%', height : "65%" ,justifyContent :"center",  alignItems: 'center', backgroundColor: "#D7F0FC" , borderTopLeftRadius: 30 , borderTopRightRadius: 30 , borderWidth: 6 , borderColor : "#fff" , elevation : 20 , shadowColor: '#000' }}>
+        {/* Buttons Container */}
+        <View style={{ width: '100%', height: '60%', alignItems: 'center' }}>
+          {/* Manage Profile Button */}
+          <TouchableOpacity
+            style={styles.pressablesbtn}
+            onPress={() => navigation.navigate('Profile')}
+          >
+            <AntDesign name="user" size={28} color="black" style={styles.icon} />
+            <Text style={styles.btnText}>Manage Profile</Text>
+            <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
+          </TouchableOpacity>
 
-        {/* Buttons View */}
+          {/* Notification Button */}
+          <TouchableOpacity style={styles.pressablesbtn}>
+            <AntDesign name="setting" size={28} color="black" style={styles.icon} />
+            <Text style={styles.btnText}>Notifications</Text>
+            <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
+          </TouchableOpacity>
 
-        {/* Profile button */}
-        <TouchableOpacity
-          style={styles.pressablesbtn}
-          onPress={() => {
-            navigation.navigate('Profile'); // Assuming a Profile screen exists
-          }}
-        >
-          <Text style={styles.btnText}>Manage Profile</Text>
-        </TouchableOpacity>
+          {/* Help and Support Button */}
+          <TouchableOpacity style={styles.pressablesbtn}>
+            <AntDesign name="questioncircleo" size={28} color="black" style={styles.icon} />
+            <Text style={styles.btnText}>Help & Support</Text>
+            <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
+          </TouchableOpacity>
 
-        {/* Notification button */}
-        <TouchableOpacity style={styles.pressablesbtn}>
-          <Text style={styles.btnText}>Notifications</Text>
-        </TouchableOpacity>
+          {/* Share App Button */}
+          <TouchableOpacity style={styles.pressablesbtn}>
+            <AntDesign name="sharealt" size={28} color="black" style={styles.icon} />
+            <Text style={styles.btnText}>Share App</Text>
+            <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
+          </TouchableOpacity>
 
-        {/* Help and Support button */}
-        <TouchableOpacity style={styles.pressablesbtn}>
-          <Text style={styles.btnText}>Help & Support</Text>
-        </TouchableOpacity>
-
-        {/* Share App button */}
-        <TouchableOpacity style={styles.pressablesbtn}>
-          <Text style={styles.btnText}>Share App</Text>
-        </TouchableOpacity>
-
-        {/* Logout button */}
-        <TouchableOpacity
-          style={styles.pressablesbtn}
-          onPress={() => {
-            auth().signOut().then(() => navigation.navigate('Login'));
-          }}
-        >
-          <Text style={styles.btnText}>Logout</Text>
-        </TouchableOpacity>
-
+          {/* Logout Button */}
+          <TouchableOpacity
+            style={styles.pressablesbtn}
+            onPress={() => {
+              auth().signOut().then(() => navigation.navigate('Login'));
+            }}
+          >
+            <AntDesign name="poweroff" size={28} color="black" style={styles.icon} />
+            <Text style={styles.btnText}>Logout</Text>
+            <AntDesign name="right" size={24} color="#B8B8B8" style={styles.arrow} />
+          </TouchableOpacity>
         </View>
-
-      </View>
-
-
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -124,12 +122,10 @@ const Setting = ({ navigation }) => {
 export default Setting;
 
 const styles = StyleSheet.create({
-
   containerback: {
     flex: 1,
-    backgroundColor: '#d7f0fc',
   },
-  header: {
+  /*header: {
     flex: 0.065,
     backgroundColor: '#d7f0fc',
     paddingStart: 20,
@@ -137,50 +133,53 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  btnText: {
-    color: '#308CD7',
-    fontSize: 20,
-    fontWeight: "600",
-    fontFamily: 'calibri',
-    padding: 5
-  },
-
-  headerText: {
+   headerText: {
     color: '#2F2F2F',
     fontSize: 36,
-    fontWeight: 'semibold',
+    alignSelf: 'flex-start',
+    fontWeight: '600',
     fontFamily: 'inter',
+  },*/
+  btnText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '600',
+    fontFamily: 'calibri',
+    flex: 1, // Take remaining space between icon and arrow
+    textAlign: 'left', // Align text to the left within its flex space
   },
   middleView: {
     flex: 0.94,
     marginTop: 20,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   pressablesbtn: {
-    fontSize: 20,
-    borderRadius: 10,
-    borderWidth: 2,
     marginTop: 15,
     width: '90%',
     height: 50,
-    paddingLeft: 20,
-    backgroundColor: 'white',
-    borderColor: 'white',
-    elevation : 7 ,
-    shadowOpacity:6, 
-    shadowColor: '#308CD7'
-
+    borderRadius:7,
+    backgroundColor: '#F5F3F3',
+    elevation: 5,
+    shadowOpacity: 0.6,
+    shadowColor: '#308CD7',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15, // Add padding to the sides for better spacing
   },
-  pressablesavebtn: {
+  /*pressablesavebtn: {
     height: 50,
     width: '90%',
     marginTop: 30,
-    backgroundColor: '#000',
+    backgroundColor: 'gray',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-
+  },*/
+  icon: {
+    marginRight: 15, // Space between icon and text
   },
-
+  arrow: {
+    marginLeft: 15, // Space between text and arrow
+  },
 });
