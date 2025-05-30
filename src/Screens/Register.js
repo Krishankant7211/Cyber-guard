@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
+
 const Loginbg = require('../Assets/background1.png');
 
 const register = ({ navigation }) => {

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImageBackground, A
 import React , {useState} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
+import { Image } from 'react-native-reanimated/lib/typescript/Animated';
 
 const Loginbg = require('../Assets/background1.png');
 
@@ -120,8 +121,3 @@ const styles = StyleSheet.create({
 
   }
 })
-
-
-
-
-
