@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground ,  TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground ,  TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
@@ -133,6 +133,8 @@ const updateUserDataInFirestore = () => {
         <View  style = {{height : '60%' , width : '90%' }}  >
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }} >
+        <Image source={require('../Assets/appLogo.jpg')} style={{ width: '90%', height: '25%', marginBottom: 20 }} />
+
             <Text style={styles.text} > Register  </Text>
 
             <Text style={styles.text2} >Join The Cyber Shield Today</Text>

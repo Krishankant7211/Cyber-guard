@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImageBackground, Alert } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,Image , TextInput, ImageBackground, Alert } from 'react-native'
 import React , {useState} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
-import { Image } from 'react-native-reanimated/lib/typescript/Animated';
+//import { Image } from 'react-native-reanimated/lib/typescript/Animated';
 
 const Loginbg = require('../Assets/background1.png');
 
@@ -22,18 +22,32 @@ const LoginUser = () => {
   });
   
 }
+// function to check if user is already logged in or not
+const checkUser = () => {
+  auth().onAuthStateChanged(user => {
+    if (user) {
+      navigation.navigate('HomeBottomNav');
+    } else {
+      console.log("User not logged in");
+    }
+  });
+}
+// Call checkUser function when the component mounts
 
 
 
 
   return (
+    checkUser(),
     <SafeAreaView style = {styles.Safecontener} >
     <ImageBackground source={Loginbg} resizeMode='cover' style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
       <View style={{ height: '80%', width: '90%'}} >
 
 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }} >\
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }} >
+          
+          <Image source={require('../Assets/appLogo.jpg')} style={{ width: '90%', height: '25%', marginBottom: 20 }} />
 
           <Text style={styles.text} > LOGIN  </Text>
 
