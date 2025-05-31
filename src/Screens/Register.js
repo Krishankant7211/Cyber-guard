@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground ,  TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground ,  TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
 
-const Loginbg = require('../Assets/register.png');
+const Loginbg = require('../Assets/background1.png');
 
 const register = ({ navigation }) => {
     const [Email, setEmail] = useState('');
@@ -130,24 +130,34 @@ const updateUserDataInFirestore = () => {
         <SafeAreaView style = {styles.Safecontener}   >
         <ImageBackground source={Loginbg} resizeMode='cover' style={{ flex: 1 , justifyContent : 'center' , alignItems : 'center' }}>
 
-        <View  style = {{height : '60%' , width : '90%' , backgroundColor : 'wheat' , borderRadius : 30 , borderWidth : 1 , borderColor : 'white' , elevation : 30 }}  >
+        <View  style = {{height : '60%' , width : '90%' }}  >
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }} >
+        <Image source={require('../Assets/appLogo.jpg')} style={{ width: '90%', height: '25%', marginBottom: 20 }} />
+
             <Text style={styles.text} > Register  </Text>
+
+            <Text style={styles.text2} >Join The Cyber Shield Today</Text>
+
             <TextInput placeholder=' Name '
                 value={Name}
                 onChangeText={txt => setName(txt)}
                 style={styles.textinput}
             />
             
-            <TextInput placeholder=' Email '
+            <TextInput placeholder=' Enter Email ID '
                 value={Email}
                 onChangeText={txt => setEmail(txt)}
                 style={styles.textinput}
             />
 
+            <TextInput placeholder=' Enter Mobile Number '
+                value={Password}
+                onChangeText={txt => setPassword(txt)}
+                style={styles.textinput}
+            />
 
-            <TextInput placeholder=' Password '
+            <TextInput placeholder=' Enter Password '
                 value={Password}
                 onChangeText={txt => setPassword(txt)}
                 style={styles.textinput}
@@ -157,13 +167,13 @@ const updateUserDataInFirestore = () => {
             <TouchableOpacity style={styles.touchableopsbtn} onPress={() => { 
                 createUser();
                 navigation.navigate('Login') }}  >
-                <Text style={{ color: '#fff' , fontSize : 20 }} > Register </Text>
+                <Text style={{ color: '#fff' , fontSize : 20, }} > Sign Up </Text>
             </TouchableOpacity>
 
             
             <TouchableOpacity style={styles.touchableopstext} onPress={() => { 
                 navigation.navigate('Login') }}  >
-                <Text style={{ color: 'darkslateblue' }} > Already have an account? Login  </Text>
+                <Text style={{ color: 'darkslateblue',fontSize:16,fontFamily: "Roboto Condensed"}} > Already have an account? Login  </Text>
             </TouchableOpacity>
         </View>
 
@@ -182,32 +192,43 @@ const styles = StyleSheet.create({
         flex :1 ,
         backfaceVisibility : '#fff',
         padding : 5,
+        backgroundColor:'white'
       },
     text: {
-        fontSize: 40,
+        fontSize: 48,
+        fontWeight: '700',
         color: 'black',
-        marginBottom: 20,
-        
+        fontFamily: "Roboto Condensed",
+    },
+    text2: {
+        fontSize: 20,
+        fontWeight:400,
+        color: '#050171',
+        textAlign: 'center',
+        marginTop: 5,
+        marginBottom: 50,
+        fontFamily: "Roboto Condensed"
     },
     textinput: {
+        fontFamily: "Roboto Condensed",
         fontSize: 20,
-        borderRadius: 20,
-        borderWidth: .8,
-        marginTop: 30,
-        width: '90%',
-        height: 50,
+        borderRadius:2,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'white',
+        width: '92%',
+        height: 60,
         paddingLeft: 20,
-        backgroundColor : 'white',
-        borderColor : 'white'
+        marginTop:20,
     },
     touchableopsbtn: {
-        height: 50,
-        width: '90%',
+       borderRadius:2,
+        height: 60,
+        width: '92%',
         marginTop: 30,
-        backgroundColor: '#000',
+        backgroundColor: '#050171',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
 
     },
     touchableopstext: {
@@ -216,7 +237,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         backgroundColor: '#fff',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems:'flex-end',
         borderRadius: 20,
 
     }
