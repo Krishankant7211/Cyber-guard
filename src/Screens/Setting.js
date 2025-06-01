@@ -16,6 +16,27 @@ const Setting = ({ navigation }) => {
     email: 'Loading...',
   });
 
+const [selectedImage, setSelectedImage] = useState(null);
+
+
+// function to retrieve the profile image from RNFS and set it to imageview
+  const loadImagePath = async () => {
+    const filePath = `${RNFS.DocumentDirectoryPath}/profile.jpg`; // Stored file path
+
+    const fileExists = await RNFS.exists(filePath);
+    if (fileExists) {
+      setSelectedImage(`file://${filePath}`); // Update Image View
+      console.log("Image retrieved:", filePath);
+    } else {
+      console.log("Image file not found at:", filePath);
+    }
+  };
+  // Call loadImagePath when the component mounts to load the image
+  useEffect(() => {
+    loadImagePath();
+  }, []);
+
+
   // Fetch user data from Firestore when component mounts
   useEffect(() => {
     const fetchUserData = async () => {
@@ -53,7 +74,7 @@ const Setting = ({ navigation }) => {
         {/* Profile Info View */}
         <View style={styles.middleView}>
           <Image
-            source={localImage}
+            source={selectedImage ? { uri: selectedImage } : localImage}
             style={{marginBottom: 2,width: 140,height: 140,shadowOpacity: 0.6,shadowColor: '#308CD7',borderRadius: 70,elevation: 30,}}
           />
           <Text
