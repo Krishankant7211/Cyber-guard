@@ -1,4 +1,4 @@
-import {StyleSheet,Text,View,TextInput,FlatList,TouchableOpacity,} from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import Card from '../Components/Card';

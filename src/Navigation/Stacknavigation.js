@@ -10,6 +10,8 @@ import Splash from '../Splash';
 import App from '../../App';
 import NewsViewer from '../NewsViewer';
 import Search from '../Screens/Search';
+import Fraud from '../Screens/Fraud';
+import Aichat from '../Screens/Aichat';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,8 +24,11 @@ const Stacknavigation = () => {
             <Stack.Screen name='Register' component={Register} options={{headerShown : false}} />
             <Stack.Screen name='HomeBottomNav' component={HomeBottomNav} options={{headerShown : false}} />
             <Stack.Screen name="NewsViewer" component={NewsViewer}/>
+            <Stack.Screen name='Fraud' component={Fraud} options={{headerShown : false}} />
             <Stack.Screen name='App' component={App} options={{headerShown : false}} />
+            <Stack.Screen name='Search' component={Search} options={{headerShown : false}} />
             <Stack.Screen name='Profile' component={Profile} options={{headerShown : false}} />
+            <Stack.Screen name='Aichat' component={Aichat} options={{headerShown : false}} />
       </Stack.Navigator>
     </NavigationContainer>
   )

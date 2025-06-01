@@ -1,7 +1,11 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Modal, SafeAreaView, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Import for search icon
 import { Calendar } from 'react-native-calendars';
+
+const Eventlogo = require('../Assets/finalogo.png');
+const Eventbg = require('../Assets/background1.png');
 
 // Import images (ensure the path is correct)
 const id1Image = require('../Assets/id1.jpg');
@@ -68,31 +72,10 @@ const Events = ({ navigation }) => {
     setFilteredEvents(eventData);
   }, []);
 
+  // Set navigation options to hide the default header
   useEffect(() => {
     navigation.setOptions({
-      headerStyle: {
-        height: 90,
-        elevation: 6,
-        shadowColor: '#018AD8',
-        shadowOpacity: 0.8,
-        shadowRadius: 6,
-        bodercolor:'white',
-        boderwidth:2,
-        backgroundColor: 'white',
-      },
-      headerTintColor: '#233FCC',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontSize: 30,
-      },
-      headerRight: () => (
-        <TouchableOpacity
-          style={{ marginRight: 16 }}
-          onPress={() => setCalendarModalVisible(true)}
-        >
-           <Fontisto name="date" size={30} color="#233FCC" />
-        </TouchableOpacity>
-      ),
+      headerShown: false, // Hide the default header
     });
   }, [navigation]);
 
@@ -140,94 +123,181 @@ const Events = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
-      {filteredEvents.length === 0 && selectedDate ? (
-        <View style={styles.noEventsContainer}>
-          <Text style={styles.noEventsText}>No Events Placed</Text>
-          <TouchableOpacity style={styles.clearButton} onPress={clearDateFilter}>
-            <Text style={styles.clearButtonText}>Clear Date Filter</Text>
+    <SafeAreaView style={styles.safeContainer}>
+      <ImageBackground source={Eventbg} resizeMode="cover" style={styles.background}>
+        {/* Custom Header with Eventlogo */}
+        <View>
+          <Image source={Eventlogo} style={styles.logo} />
+        </View>
+
+        {/* Events Title View */}
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Events</Text>
+        </View>
+
+        {/* Calendar Icon and Date View */}
+        <View style={styles.calendarContainer}>
+          <TouchableOpacity
+            style={styles.calendarBox}
+            onPress={() => setCalendarModalVisible(true)}
+          >
+            <View style={styles.leftContainer}>
+              <MaterialIcons name="search" size={30} color="#233FCC" style={styles.searchIcon} />
+              <Text style={styles.calendarText}>Search By Date</Text>
+            </View>
+            <Fontisto name="date" size={30} color="#233FCC" />
           </TouchableOpacity>
         </View>
-      ) : (
-        <>
-          <FlatList
-            data={filteredEvents}
-            renderItem={renderEventCard}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.listContainer}
-          />
-          {selectedDate && filteredEvents.length > 0 && (
-            <TouchableOpacity style={styles.backButton} onPress={clearDateFilter}>
-              <Text style={styles.backButtonText}>Back</Text>
-            </TouchableOpacity>
+
+        {/* Events List View */}
+        <View style={styles.contentContainer}>
+          {filteredEvents.length === 0 && selectedDate ? (
+            <View style={styles.noEventsContainer}>
+              <Text style={styles.noEventsText}>No Events Placed</Text>
+              <TouchableOpacity style={styles.clearButton} onPress={clearDateFilter}>
+                <Text style={styles.clearButtonText}>Clear Date Filter</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <>
+              <FlatList
+                data={filteredEvents}
+                renderItem={renderEventCard}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={styles.listContainer}
+              />
+              {selectedDate && filteredEvents.length > 0 && (
+                <TouchableOpacity style={styles.backButton} onPress={clearDateFilter}>
+                  <Text style={styles.backButtonText}>Back</Text>
+                </TouchableOpacity>
+              )}
+            </>
           )}
-        </>
-      )}
-      {/* Modal for enlarged image */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            {selectedImage && (
-              <Image source={selectedImage} style={styles.enlargedImage} />
-            )}
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
         </View>
-      </Modal>
-      {/* Modal for calendar */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={calendarModalVisible}
-        onRequestClose={() => setCalendarModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.calendarModalContent}>
-            <Calendar
-              onDayPress={handleDateSelect}
-              markedDates={{
-                [selectedDate]: { selected: true, selectedColor: '#40ACFF' },
-              }}
-              theme={{
-                calendarBackground: '#fff',
-                textSectionTitleColor: '#40ACFF',
-                selectedDayBackgroundColor: '#40ACFF',
-                selectedDayTextColor: '#fff',
-                todayTextColor: '#40ACFF',
-                dayTextColor: '#333',
-                textDisabledColor: '#d9e1e8',
-                arrowColor: '#40ACFF',
-              }}
-            />
-            <View style={styles.calendarButtonContainer}>
+
+        {/* Modal for enlarged image */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              {selectedImage && (
+                <Image source={selectedImage} style={styles.enlargedImage} />
+              )}
               <TouchableOpacity
                 style={styles.closeButton}
-                onPress={() => setCalendarModalVisible(false)}
+                onPress={() => setModalVisible(false)}
               >
                 <Text style={styles.closeButtonText}>Close</Text>
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+
+        {/* Modal for calendar */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={calendarModalVisible}
+          onRequestClose={() => setCalendarModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.calendarModalContent}>
+              <Calendar
+                onDayPress={handleDateSelect}
+                markedDates={{
+                  [selectedDate]: { selected: true, selectedColor: '#40ACFF' },
+                }}
+                theme={{
+                  calendarBackground: '#fff',
+                  textSectionTitleColor: '#40ACFF',
+                  selectedDayBackgroundColor: '#40ACFF',
+                  selectedDayTextColor: '#fff',
+                  todayTextColor: '#40ACFF',
+                  dayTextColor: '#333',
+                  textDisabledColor: '#d9e1e8',
+                  arrowColor: '#40ACFF',
+                }}
+              />
+              <View style={styles.calendarButtonContainer}>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setCalendarModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeContainer: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    paddingTop: '8%',
+    backgroundColor:'#263CBD'
+  },
+  background: {
+    flex: 1,
+  },
+  logo: {
+    paddingTop: 25,
+    paddingLeft: 15,
+    height: 90,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#3a36a1',
+    elevation: 15,
+    shadowColor: '#018AD8',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius:20
+  },
+  titleContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  titleText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#233FCC',
+  },
+  calendarContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+  },
+  calendarBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#233FCC',
+    borderRadius: 30,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white for visibility
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+  calendarText: {
+    fontSize: 20,
+    color: '#233FCC',
+    fontWeight: '400',
+  },
+  contentContainer: {
+    flex: 1,
   },
   listContainer: {
     padding: 10,
@@ -237,12 +307,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginBottom: 18,
+    marginHorizontal: 10,
     elevation: 6,
     shadowColor: '#018AD8',
     shadowOpacity: 0.8,
     shadowRadius: 6,
-     borderColor:'#CECECE',
-        borderWidth:2,
+    borderColor: '#CECECE',
+    borderWidth: 0.4,
   },
   eventImage: {
     width: '100%',

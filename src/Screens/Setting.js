@@ -124,6 +124,7 @@ export default Setting;
 const styles = StyleSheet.create({
   containerback: {
     flex: 1,
+    backgroundColor:'white'
   },
   /*header: {
     flex: 0.065,

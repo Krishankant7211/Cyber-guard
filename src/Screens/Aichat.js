@@ -8,15 +8,20 @@ import {
   StyleSheet,
   SafeAreaView,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ImageBackground,
 } from 'react-native';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const Aibg = require('../Assets/background1.png');
 
 const GEMINI_API_KEY = 'AIzaSyDsE7hkDFg6NBqEkLz5dcd9_gOxNthQSbk'; // Replace with your actual API key
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-const ChatbotScreen = () => {
+const Aichat = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -56,45 +61,54 @@ const ChatbotScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>AI CHAT BOT</Text>
-        <TouchableOpacity style={styles.clearButton} onPress={clearChat}>
-          <Text style={styles.clearButtonText}>Clear</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView
-        style={styles.chatArea}
-        ref={scrollViewRef}
-        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
-      >
-        {messages.map((msg, index) => (
-          <View
-            key={index}
-            style={[
-              styles.messageContainer,
-              msg.sender === 'user' ? styles.userMessage : styles.aiMessage,
-            ]}
-          >
-            <Text style={styles.messageText}>{msg.text}</Text>
+      <ImageBackground source={Aibg} style={styles.background} resizeMode="cover">
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        >
+          <View style={styles.header}>
+            <Text style={styles.headerText}>AI CHAT BOT</Text>
+            <TouchableOpacity style={styles.clearButton} onPress={clearChat}>
+              <Text style={styles.clearButtonText}>Clear</Text>
+            </TouchableOpacity>
           </View>
-        ))}
-        {loading && (
-          <ActivityIndicator size="large" color="#4CAF50" style={styles.loader} />
-        )}
-      </ScrollView>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={inputText}
-          onChangeText={setInputText}
-          placeholder="Type your query here..."
-          placeholderTextColor="#888"
-          editable={!loading}
-        />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage} disabled={loading}>
-          <Text style={styles.sendButtonText}>Send</Text>
-        </TouchableOpacity>
-      </View>
+          <ScrollView
+            style={styles.chatArea}
+            ref={scrollViewRef}
+            onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          >
+            {messages.map((msg, index) => (
+              <View
+                key={index}
+                style={[
+                  styles.messageContainer,
+                  msg.sender === 'user' ? styles.userMessage : styles.aiMessage,
+                ]}
+              >
+                <Text style={styles.messageText}>{msg.text}</Text>
+              </View>
+            ))}
+            {loading && (
+              <ActivityIndicator size="large" color="#263CBD" style={styles.loader} />
+            )}
+          </ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={inputText}
+              onChangeText={setInputText}
+              placeholder="Type your query here..."
+              placeholderTextColor="#888"
+              editable={!loading}
+            />
+            <TouchableOpacity style={styles.sendButton} onPress={sendMessage} disabled={loading}>
+              <Text style={styles.sendButtonText}>Send</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -102,10 +116,12 @@ const ChatbotScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+  },
+  background: {
+    flex: 1,
   },
   header: {
-    backgroundColor: '#98C9ED',
+    backgroundColor: '#263CBD',
     padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -117,7 +133,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     marginTop: 25,
-    color: '#2F2F2F',
+    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -142,24 +158,26 @@ const styles = StyleSheet.create({
     maxWidth: '70%',
   },
   userMessage: {
-    backgroundColor: '#2f2f2f',
+    backgroundColor: '#211BD3',
     alignSelf: 'flex-end',
-    elevation : 10,
+    elevation: 10,
     shadowColor: 'blue',
+    borderColor: '#1C17BA',
+    borderWidth: 2,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
   },
   aiMessage: {
-    backgroundColor: '#98C9ED',
+    backgroundColor: '#539BFF',
     alignSelf: 'flex-start',
-    elevation : 25,
-    shadowColor: 'blue',
+    elevation: 20,
+    shadowColor: '#018AD8',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 10,
+    shadowOpacity: 0.5,
   },
   messageText: {
     color: '#FFF',
-    fontSize: 16,
+    fontSize: 18,
   },
   loader: {
     marginVertical: 10,
@@ -183,7 +201,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   sendButton: {
-    backgroundColor: '#2f2f2f',
+    backgroundColor: '#263CBD',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -196,4 +214,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChatbotScreen;
+export default Aichat;

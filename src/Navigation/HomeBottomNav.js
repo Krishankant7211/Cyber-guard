@@ -28,6 +28,7 @@ const HomeBottomNav = () => {
                 name='News'
                 component={News}
                 options={{
+                    headerShown: false,
                     title: 'News',
                     tabBarIcon: ({ focused }) => (
                         <Image source={require('../Assets/news.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
@@ -37,6 +38,7 @@ const HomeBottomNav = () => {
                 name='Events'
                 component={Events}
                 options={{
+                    headerShown: false,
                     title: 'Events',
                     tabBarIcon: ({ focused }) => (
                         <Image source={require('../Assets/chat.png')} style={{ height: 36, width: 36, tintColor: focused ? '#233FCC' : 'lightgrey' }} />
