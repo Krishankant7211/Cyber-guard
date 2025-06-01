@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl, Image, SafeAreaView, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Card from '../Components/Card';
-import { MagnifyingGlassIcon } from 'react-native-heroicons/solid';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const newslogo = require('../Assets/logo.png');
+const newslogo = require('../Assets/finalogo.png');
+const newsbg = require('../Assets/background1.png');
 
 const News = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -20,24 +21,6 @@ const News = ({ navigation }) => {
     { id: 5, name: 'Science', query: 'cybersecurity science OR research' },
   ];
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerStyle: {
-        height: 85,
-        shadowColor: '#0198E3',
-        shadowOpacity: 0.6,
-        elevation: 5,
-        backgroundColor: 'white',
-       
-      },
-      headerTintColor: '#233FCC',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontSize: 30,
-      },
-    });
-  }, [navigation]);
-
   const getData = async (categoryQuery) => {
     try {
       setError(null);
@@ -46,8 +29,12 @@ const News = ({ navigation }) => {
       );
       const result = await response.json();
       if (result.status === 'ok' && result.articles) {
-        setData(result.articles);
-        if (result.articles.length === 0) {
+        // Sort articles by publishedAt date in descending order (most recent first)
+        const sortedArticles = result.articles.sort((a, b) => 
+          new Date(b.publishedAt) - new Date(a.publishedAt)
+        );
+        setData(sortedArticles);
+        if (sortedArticles.length === 0) {
           setError('No new articles found for this category');
         }
       } else {
@@ -84,83 +71,132 @@ const News = ({ navigation }) => {
 
   if (loading && !refreshing) {
     return (
-      <View style={styles.loading}>
+      <SafeAreaView style={styles.loading}>
         <ActivityIndicator size={50} color="#0000ff" />
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
-      {/* Category Tabs */}
-      <View style={styles.categoryContainer}>
-        <FlatList
-          data={categories}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.categoryList}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity
-              style={[
-                styles.categoryButton,
-                index === select ? styles.selectedCategory : styles.unselectedCategory,
-              ]}
-              onPress={() => setSelect(index)}
-            >
-              <Text
-                style={
-                  index === select ? styles.selectedCategoryText : styles.unselectedCategoryText
-                }
-              >
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id.toString()}
-          initialNumToRender={5}
-          windowSize={5}
-        />
+    <SafeAreaView style={styles.safeArea}>
+      {/* Logo View with Background Image */}
+      <ImageBackground source={newsbg} resizeMode="cover">
+        <Image source={newslogo} style={styles.logo} />
+      </ImageBackground>
+
+      {/* News Title View with Search Icon */}
+      <View style={styles.newsTitleContainer}>
+        <Text style={styles.newsTitleText}>News</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <MaterialIcons name="search" size={32} color="#000" style={styles.searchIcon} />
+        </TouchableOpacity>
       </View>
 
-      {/* News List with RefreshControl */}
-      <FlatList
-        data={data}
-        renderItem={({ item, index }) => <Card item={item} navigation={navigation} />}
-        keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={false}
-        initialNumToRender={10}
-        windowSize={5}
-        contentContainerStyle={styles.newsList}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={['#40ACFF']}
-            tintColor="#40ACFF"
-          />
-        }
-        ListEmptyComponent={
-          error ? (
-            <View style={styles.errorContainer}>
-              <Text style={styles.errorText}>{error}</Text>
+      {/* Content Below Banner */}
+      <View style={styles.contentContainer}>
+        {/* Category Tabs */}
+        <View style={styles.categoryContainer}>
+          <FlatList
+            data={categories}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.categoryList}
+            renderItem={({ item, index }) => (
               <TouchableOpacity
-                style={styles.retryButton}
-                onPress={() => getData(categories[select].query)}
+                style={[
+                  styles.categoryButton,
+                  index === select ? styles.selectedCategory : styles.unselectedCategory,
+                ]}
+                onPress={() => setSelect(index)}
               >
-                <Text style={styles.retryButtonText}>Retry</Text>
+                <Text
+                  style={
+                    index === select ? styles.selectedCategoryText : styles.unselectedCategoryText
+                  }
+                >
+                  {item.name}
+                </Text>
               </TouchableOpacity>
-            </View>
-          ) : null
-        }
-      />
-    </View>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            initialNumToRender={5}
+            windowSize={5}
+          />
+        </View>
+
+        {/* News List with RefreshControl */}
+        <FlatList
+          data={data}
+          renderItem={({ item, index }) => <Card item={item} navigation={navigation} />}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+          initialNumToRender={10}
+          windowSize={5}
+          contentContainerStyle={styles.newsList}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={['#40ACFF']}
+              tintColor="#40ACFF"
+            />
+          }
+          ListEmptyComponent={
+            error ? (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+                <TouchableOpacity
+                  style={styles.retryButton}
+                  onPress={() => getData(categories[select].query)}
+                >
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null
+          }
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default News;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
+    flex: 1,
+    paddingTop: '8%',
+    backgroundColor: '#263CBD', // Background color for the status bar area (above banner)
+  },
+  logo: {
+    height: 90,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 15,
+    shadowColor: '#018AD8',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
+  },
+  newsTitleContainer: {
+    backgroundColor: '#fff', // White background
+    paddingHorizontal: 16,
+    flexDirection: 'row', // Use row to place text and icon side by side
+    justifyContent: 'space-between', // Space between text and icon
+    alignItems: 'center', // Vertically center content
+  },
+  newsTitleText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#233FCC',
+    textAlign: 'left',
+  },
+  searchIcon: {
+    marginRight: 14,
+    color: '#233FCC',
+    fontWeight: 'bold',
+  },
+  contentContainer: {
     flex: 1,
     backgroundColor: '#D7F0FC',
   },
@@ -168,7 +204,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D7F0FC',
+    backgroundColor: 'white',
   },
   errorContainer: {
     flex: 1,
@@ -196,7 +232,7 @@ const styles = StyleSheet.create({
   },
   categoryContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 5,
     backgroundColor: 'white',
   },
   categoryList: {
@@ -207,18 +243,20 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginRight: 12,
     borderRadius: 10,
-    shadowColor: '#000000',
-    elevation: 9,
+    borderColor: '#7F7F7F',
+    borderWidth: 0.2,
+    shadowColor: '#018AD8',
+    elevation: 4,
     shadowOpacity: 0.8,
     backgroundColor: '#40ACFF',
   },
   selectedCategory: {
     backgroundColor: '#233FCC',
-    borderColor:'red',
-    borderWidth:1
+    borderColor: 'red',
+    borderWidth: 1,
   },
   unselectedCategory: {
-    backgroundColor: '#E5E7EB',
+    backgroundColor: '#F0F0F0',
   },
   selectedCategoryText: {
     color: '#fff',
