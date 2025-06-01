@@ -3,9 +3,7 @@ import React ,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import RNFS from "react-native-fs";
-import ImageCropPicker from 'react-native-image-crop-picker';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 
 const localImage = require("../Assets/Profileimg.jpg");
@@ -17,48 +15,7 @@ const Profile = ({ navigation }) => {
       const [Password, setPassword] = useState('');
       const [Name , setName ] = useState('');
       const [loading , setLoading] = useState('');
-      const [selectedImage, setSelectedImage] = useState(null);
-
-      // function to pick image from gallery and set it to imageview 
-  const handleImagePress = async () => {
-    try {
-      const image = await ImageCropPicker.openPicker({
-        width: 200,
-        height: 200,
-        cropping: true,
-        includeBase64: true,
-        mediaType: "photo",
-      });
-      const fileName = `${RNFS.DocumentDirectoryPath}/profile.jpg`;
-
-// Save the cropped image to the file system
-await RNFS.writeFile(fileName, image.data, 'base64');
-
-      const fileExists = await RNFS.exists(fileName);
-if (fileExists) {
-  setSelectedImage(`file://${fileName}`);
-} else {
-  console.error("File not found at:", fileName);
-}
-      console.log("Cropped image saved:", fileName);
-    } catch (error) {
-      console.error("Error selecting and cropping image:", error);
-    }
-  };
-
-// function to pick image from gallery and set it to imageview end here
-
-
-// function to store the image , username and email in async storage  
-const saveImagePath = async (imagePath) => {
-  try {
-    await AsyncStorage.setItem("profileImage", selectedImage);
-  } catch (error) {
-    console.error("Error saving image path:", error);
-  }
-};
-// function to store the image , username and email in async storage end here
-
+     
 
   const updateUserDataInFirestore = () => {
     setLoading(true);
@@ -98,9 +55,9 @@ const saveImagePath = async (imagePath) => {
 
       <View style={styles.middleView}>
         
-        <TouchableOpacity onPress={handleImagePress} style={{ marginBottom: 20 }}>
+        <TouchableOpacity  style={{ marginBottom: 20 }}>
         <Image
-          source={selectedImage ? { uri: selectedImage } : localImage}
+          source={localImage}
           style={{ width: 140, height: 140, borderRadius: 70, elevation: 30 }}
         />
         </TouchableOpacity>
@@ -117,9 +74,7 @@ const saveImagePath = async (imagePath) => {
          {/* <TextInput placeholder='Update Password'value={Password} onChangeText={txt=> setPassword(txt)}  style={styles.textinput} /> */}
 
         <TouchableOpacity style={styles.pressablesavebtn}>
-          <Text style={{ color: 'white', fontSize: 20 }} onPress={()=>{updateUserDataInFirestore()
-            saveImagePath()
-            }}   >Save</Text>
+          <Text style={{ color: 'white', fontSize: 20 }} onPress={()=>{updateUserDataInFirestore()    }}   >Save</Text>
         </TouchableOpacity>
 
 
