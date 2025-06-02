@@ -151,12 +151,7 @@ const updateUserDataInFirestore = () => {
                 style={styles.textinput}
             />
 
-            <TextInput placeholder=' Enter Mobile Number '
-                value={Password}
-                onChangeText={txt => setPassword(txt)}
-                style={styles.textinput}
-            />
-
+            
             <TextInput placeholder=' Enter Password '
                 value={Password}
                 onChangeText={txt => setPassword(txt)}
