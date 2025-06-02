@@ -12,6 +12,8 @@ import NewsViewer from '../NewsViewer';
 import Search from '../Screens/Search';
 import Fraud from '../Screens/Fraud';
 import Aichat from '../Screens/Aichat';
+import GoogleLogin from '../Screens/GoogleLogin';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +31,8 @@ const Stacknavigation = () => {
             <Stack.Screen name='Search' component={Search} options={{headerShown : false}} />
             <Stack.Screen name='Profile' component={Profile} options={{headerShown : false}} />
             <Stack.Screen name='Aichat' component={Aichat} options={{headerShown : false}} />
+            <Stack.Screen name='GoogleLogin' component={GoogleLogin} options={{headerShown : false}} />
+            
       </Stack.Navigator>
     </NavigationContainer>
   )

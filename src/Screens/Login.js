@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity,Image , TextInput, ImageBackgr
 import React , {useState} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
+import GoogleLogin from './GoogleLogin';
 //import { Image } from 'react-native-reanimated/lib/typescript/Animated';
 
 const Loginbg = require('../Assets/background1.png');
@@ -70,6 +71,7 @@ const checkUser = () => {
           <TouchableOpacity style={styles.touchableopstext} onPress={() => { navigation.navigate('Register') }}  >
             <Text style={{ color: 'darkslateblue',color:'#050171', fontSize:16,fontFamily: "Roboto Condensed"}} > Create New Account? Register Here  </Text>
           </TouchableOpacity>
+          <GoogleLogin></GoogleLogin>
         </View>
 
 
